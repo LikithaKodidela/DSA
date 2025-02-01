@@ -1,6 +1,5 @@
 class Solution {
 public:
-   stack<int> st;
     bool isPalindrome(int x) {
         if(x<0)
         {
