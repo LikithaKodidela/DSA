@@ -2,22 +2,11 @@ class Solution {
 public:
     int singleNumber(vector<int>& nums) {
         int n=nums.size();
-        if(n==1)
-        {
-            return nums[0];
-        }
-        unordered_map<int,int> freq;
+        int xor1=0;
         for(int i=0;i<n;i++)
         {
-            freq[nums[i]]++;
+            xor1=xor1^nums[i];
         }
-        for(auto &it : freq)
-        {
-            if(it.second==1)
-            {
-                return it.first;
-            }
-        }
-        return -1;
+        return xor1;
     }
 };
