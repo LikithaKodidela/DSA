@@ -1,18 +1,23 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-       map<int,int> mpp;
-       int n=nums.size();
-       for(int i=0;i<n;i++)
-       {
-        int a=nums[i];
-        int b=target-a;
-        if(mpp.find(b)!=mpp.end())
-        {
-            return{i,mpp[b]};
-        }
-        mpp[a]=i;
-       }
-       return{-1,-1};
+    vector<pair<int, int>> numWithIndex;
+    for (int i = 0; i < nums.size(); ++i) {
+        numWithIndex.push_back({nums[i], i});
     }
+    sort(numWithIndex.begin(), numWithIndex.end());
+
+    int left = 0, right = nums.size() - 1;
+    while (left < right) {
+        int sum = numWithIndex[left].first + numWithIndex[right].first;
+        if (sum == target) {
+            return {numWithIndex[left].second, numWithIndex[right].second};
+        } else if (sum < target) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+    return {-1, -1};
+        }
 };
