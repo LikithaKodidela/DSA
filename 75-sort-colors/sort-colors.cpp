@@ -1,42 +1,29 @@
 class Solution {
 public:
-   
-    void sortColors(vector<int>& nums) 
-    {
-       quicksort(nums,0,nums.size()-1); 
-    }
-    private:
-
-    void quicksort(vector<int>& nums,int p,int r)
-    {
-        if(p<r)
+    void sortColors(vector<int>& nums) {
+       int n=nums.size();
+        int count0=0;
+        int count1=0;
+        int count2=0;
+        for(int i=0;i<n;i++)
         {
-            int q=partition(nums,p,r);
-            quicksort(nums,p,q-1);
-            quicksort(nums,q+1,r);
-        }
-    }
-
-    int partition(vector<int> &nums,int p,int r)
-    {
-        int x=nums[r];
-        int i=p-1;
-        for(int j=p;j < r;j++)
-        {
-            if(nums[j]<=x)
+           if(nums[i]==0)
            {
-            i++;
-            swap(nums[i],nums[j]);
+            count0++;
+           }
+           else if(nums[i]==1)
+           {
+            count1++;
+           }
+           else
+           {
+            count2++;
            }
         }
-        swap(nums[i+1],nums[r]);
-        return i+1;
-    }
+          int i = 0;
 
-    void swap(int &a ,int &b)
-    {
-        int temp=a;
-        a=b;
-        b=temp;
+        while (count0--) nums[i++] = 0;
+        while (count1--) nums[i++] = 1;
+        while (count2--) nums[i++] = 2; 
     }
 };
