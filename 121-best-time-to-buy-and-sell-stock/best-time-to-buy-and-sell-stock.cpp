@@ -3,19 +3,13 @@ public:
     int maxProfit(vector<int>& prices) {
         int n=prices.size();
         int maxprofit=0;
-        int right=1,left=0;
-            while(right<n)
-            {
-                if(prices[right]>prices[left])
-                {
-                    maxprofit=max(maxprofit,prices[right]-prices[left]);
-                }
-                else
-                {
-                    left=right;
-                }
-                right++;
-            }
+        int mini=prices[0];
+        for(int i=1;i<n;i++)
+        {
+            int cost=prices[i]-mini;
+            maxprofit=max(cost,maxprofit);
+            mini=min(mini,prices[i]);
+        }
         return maxprofit; 
     }
 };
