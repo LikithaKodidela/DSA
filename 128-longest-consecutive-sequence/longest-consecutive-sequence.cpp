@@ -2,7 +2,7 @@ class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
         int n=nums.size();
-        int maxlen=1;
+        int maxlen=0;
         if(n==0)
         {
            return 0;
