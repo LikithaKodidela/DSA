@@ -15,9 +15,9 @@ vector<int> GenerateRow(int row)
 }
 public:
     vector<vector<int>> generate(int numRows) {
-        int n=numRows+1;
+        int n=numRows;
         vector<vector<int>> ans;
-        for(int row=1;row<n;row++)
+        for(int row=1;row<=n;row++)
         {
             vector<int>temp=GenerateRow(row);
             ans.push_back(temp);
