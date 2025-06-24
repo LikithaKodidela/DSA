@@ -3,25 +3,21 @@ public:
     int mostFrequentEven(vector<int>& nums) {
         int n=nums.size();
         unordered_map<int,int> mpp;
-        for(int i=0;i<n;i++)
+        int res=INT_MAX;
+        int freq=0;
+        for(auto val:nums)
         {
-            if(nums[i]%2==0)
+            if(val%2==0)
             {
-              mpp[nums[i]]++;
+                mpp[val]++;
+            }
+            if(mpp[val]>freq ||(mpp[val]==freq && val<res))
+            {
+                res=val;
+                freq=mpp[val];
             }
         }
-        int res=-1;
-        int maxfreq=0;
-        for(auto &it:mpp)
-        {
-            int key=it.first;
-            int freq=it.second;
-            if(freq>maxfreq || (freq==maxfreq && key<res))
-            {
-                res=key;
-                maxfreq=freq;
-            }
-        }
-        return res;
+        return freq==0? -1:res;
     }
+
 };
