@@ -1,26 +1,25 @@
 class Solution {
 private:
-int nCr(int n,int r)
+vector<int> GenerateRow(int row)
 {
-    int res=1;
-    for(int i=0;i<r;i++ )
+    long long ans=1;
+    vector<int> res;
+    res.push_back(ans);
+    for(int col=1;col<row;col++)
     {
-        res=res*(n-i);
-        res=res/(i+1);
+        ans=ans*(row-col);
+        ans=ans/col;
+        res.push_back(ans);
     }
-    return (int)res;
+    return res;
 }
 public:
     vector<vector<int>> generate(int numRows) {
-        int n=numRows;
+        int n=numRows+1;
         vector<vector<int>> ans;
-        for(int row=1;row<=n;row++)
+        for(int row=1;row<n;row++)
         {
-            vector<int> temp;
-            for(int col=1;col<=row;col++ )
-            {
-                temp.push_back(nCr(row-1,col-1));
-            }
+            vector<int>temp=GenerateRow(row);
             ans.push_back(temp);
         }
         return ans;
