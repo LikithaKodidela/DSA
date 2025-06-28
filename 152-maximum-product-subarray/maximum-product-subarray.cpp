@@ -10,12 +10,12 @@ public:
         for(int i=0;i<n;i++)
         {
             int product=nums[i];
-            maxproduct = max(maxproduct, product);
             for(int j=i+1;j<n;j++)
             {
-                product*=nums[j];
                 maxproduct=max(maxproduct,product);
+                product*=nums[j];  
             }
+             maxproduct=max(maxproduct,product);
         }
         return maxproduct;
     }
