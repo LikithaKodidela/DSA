@@ -8,22 +8,14 @@ public:
         {
             int start=arr[i][0];
             int end=arr[i][1];
-            if(!ans.empty() && arr[i][0]<=ans.back()[1])
+            if(ans.empty()|| arr[i][0]>ans.back()[1])
             {
-                continue;
+                ans.push_back(arr[i]);
             }
-            for(int j=i+1;j<n;j++)
+            else
             {
-                if(arr[j][0]<=end)
-                {
-                    end=max(end,arr[j][1]);
-                }
-                else
-                {
-                    break;
-                }
+                ans.back()[1]=max(ans.back()[1],arr[i][1]);
             }
-              ans.push_back({start,end});
         }
         return ans;
     }
