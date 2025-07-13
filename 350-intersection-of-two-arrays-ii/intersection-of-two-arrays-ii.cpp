@@ -2,27 +2,28 @@ class Solution {
 public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
         vector<int> res;
-        unordered_map<int,int> map1;
-        unordered_map<int,int> map2;
-        for(int num:nums1)
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
+        int n=nums1.size();
+        int m=nums2.size();
+        int i=0;
+        int j=0;
+        while(i<n && j<m)
         {
-            map1[num]++;
-        }
-        for(int num:nums2)
-        {
-            map2[num]++;
-        }
-        for(auto it:map1)
-        {
-          int num=it.first;
-          if(map2.find(num)!=map2.end())
-          {
-            int freq=min(it.second,map2[num]);
-            for(int i=0;i<freq;i++)
+            if(nums1[i]==nums2[j])
             {
-             res.push_back(num);
+                res.push_back(nums1[i]);
+                i++;
+                j++;
             }
-          }
+            else if(nums1[i]<nums2[j])
+            {
+                i++;
+            }
+            else
+            {
+                j++;
+            }
         }
         return res;
     }
