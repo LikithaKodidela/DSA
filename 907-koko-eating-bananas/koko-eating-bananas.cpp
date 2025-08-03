@@ -20,12 +20,14 @@ public:
     }
     int minEatingSpeed(vector<int>& v, int h) {
         int low=1,high=findMax(v);
+        int ans=INT_MAX;
         while(low<=high)
         {
               int mid=low+(high-low)/2;
             long long result=calculateHours(v,mid);
             if(result<=h)
             {
+                ans=mid;
                 high=mid-1;
             }
             else
@@ -34,6 +36,6 @@ public:
             }
         }
         
-        return low;
+        return ans;
     }
 };
