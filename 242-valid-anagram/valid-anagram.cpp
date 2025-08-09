@@ -5,13 +5,18 @@ public:
         {
             return false;
         }
-        sort(s.begin(),s.end());
-        sort(t.begin(),t.end());
+        unordered_map<char,int> Smap;
+        unordered_map<char,int> Tmap;
         for(int i=0;i<s.length();i++)
         {
-            if(s[i]!=t[i])
+            Smap[s[i]]++;
+            Tmap[t[i]]++;
+        }
+        for(auto &it:Smap)
+        {
+            if(Tmap.find(it.first)==Tmap.end()||Tmap[it.first]!=it.second)
             {
-                return false;
+               return false;
             }
         }
         return true;
