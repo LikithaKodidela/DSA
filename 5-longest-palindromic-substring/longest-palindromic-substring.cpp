@@ -7,7 +7,7 @@ private:
             right++;
         }
         // left and right are now one step beyond the palindrome
-        return make_pair(left + 1, right - left - 1);
+        return {left + 1, right - left - 1};
     }
 
 public:
