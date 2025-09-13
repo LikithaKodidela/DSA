@@ -9,24 +9,17 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        ListNode* slow=head;
-        ListNode* fast=head;
-        while(fast&& fast->next) // to detect if there exists a cycle in the list
+        unordered_map<ListNode*,int> mpp;
+        ListNode* temp=head;
+        while(temp!=NULL)
         {
-            slow=slow->next;
-            fast=fast->next->next;
-           if(slow==fast) break;
+            if(mpp.find(temp)!=mpp.end())
+            {
+                return temp;
+            }
+            mpp[temp]=1;
+            temp=temp->next;
         }
-        if(!fast || !fast->next) // when there is no cycle
-        {
-            return NULL;
-        }
-        fast=head;// to find the starting position of the cycle we reset the fast pointer to head
-        while(fast!=slow)
-        {
-            fast=fast->next;
-            slow=slow->next;
-        }
-        return slow;
+        return NULL;
     }
 };
