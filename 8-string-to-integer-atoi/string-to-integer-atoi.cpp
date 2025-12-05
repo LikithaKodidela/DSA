@@ -1,28 +1,28 @@
 class Solution {
+    const int INT_MAX_VAL=2147483647;
+    const int INT_MIN_VAL=-2147483648;
+    int helper(const string &s,int i,long long num,int sign)
+    {
+        if(i>=s.size() || !isdigit(s[i]))
+        {
+            return (int)(sign*num);
+        }
+        num=num*10+(s[i]-'0');
+        if(sign*num<=INT_MIN_VAL) return INT_MIN_VAL;
+        if(sign*num>=INT_MAX_VAL) return INT_MAX_VAL;
+        return helper(s,i+1,num,sign);
+    }
 public:
+
     int myAtoi(string s) {
-        int i=0,n=s.size();
-        if(n==0)
-        {
-            return 0;
-        }
-        while(i<n && s[i]== ' ')i++;
-
+        int i=0;
+        while(i<s.size()&&s[i]==' ') i++;
         int sign=1;
-        if(i<n && (s[i] == '+'|| s[i] == '-'))
+        if(i<s.size()&& (s[i]=='+'||s[i]=='-'))
         {
-            if(s[i]== '-') sign= -1;
+            sign=(s[i]=='-')?-1:1;
             i++;
         }
-
-        long result=0;
-        while(i<n && isdigit(s[i]))
-        {
-            result=result*10+(s[i]-'0');
-            if(result *sign > INT_MAX) return INT_MAX;
-            if(result *sign < INT_MIN) return INT_MIN;
-            i++;
-        }
-        return (int)(result*sign);
+        return helper(s,i,0,sign);
     }
 };
