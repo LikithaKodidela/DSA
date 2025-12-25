@@ -22,7 +22,7 @@ public:
     }
 
     vector<vector<int>> combinationSum(vector<int>& arr, int target) {
-        ans.clear();
+       
         vector<int> temp;
         solve(0, arr, temp, target);
         return ans;
