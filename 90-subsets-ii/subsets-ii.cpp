@@ -1,34 +1,21 @@
 class Solution {
-public:
-    void backtrack(vector<int>& nums,
-                   vector<vector<int>>& res,
-                   vector<int>& root,
-                   int k) {
-
-        if (k == nums.size()) {
-            res.push_back(root);
-            return;
+    void backtrack(int ind,vector<int>&nums,vector<int>&ds,vector<vector<int>>&res)
+    {
+        res.push_back(ds);
+        for(int i=ind;i<nums.size();i++)
+        {
+            if(i!=ind && nums[i]==nums[i-1]) continue;
+            ds.push_back(nums[i]);
+            backtrack(i+1,nums,ds,res);
+            ds.pop_back();
         }
-
-        int idx = k;
-        while (idx < nums.size() && nums[idx] == nums[k]) {
-            idx++;
-        }
-
-        // Skip all duplicates of nums[k]
-        backtrack(nums, res, root, idx);
-
-        // Take current element
-        root.push_back(nums[k]);
-        backtrack(nums, res, root, k + 1);
-        root.pop_back();
     }
-
+public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> res;
-        vector<int> root;
-        backtrack(nums, res, root, 0);
+        vector<int> ds;
+        backtrack(0,nums,ds,res);
         return res;
     }
 };
