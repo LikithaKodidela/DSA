@@ -6,7 +6,7 @@ public:
         {
             if(nums[i]!=0)
             {
-              nums[j++]=nums[i];
+                nums[j++]=nums[i];
             }
         }
         for(int i=j;i<nums.size();i++)
