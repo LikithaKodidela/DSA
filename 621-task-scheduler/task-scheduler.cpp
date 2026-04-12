@@ -30,7 +30,7 @@ public:
                 }
             }
 
-            if(!q.empty()&&q.front().second==time)
+            if(!q.empty()&&q.front().second<=time)
             {
                 maxHeap.push(q.front().first);
                 q.pop();
