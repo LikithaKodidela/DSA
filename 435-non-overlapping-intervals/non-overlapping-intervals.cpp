@@ -8,17 +8,20 @@ public:
     {
         int n=intervals.size();
         sort(intervals.begin(),intervals.end(),comp);
-        int count=1;
+        int count=0;
         int LastEndTime=intervals[0][1];
      
         for(int i=1;i<n;i++)
         {
-            if(intervals[i][0]>=LastEndTime)
+            if(intervals[i][0]<LastEndTime)
             {
                 count++;
-                LastEndTime=intervals[i][1];
+            }
+            else
+            {
+                 LastEndTime=intervals[i][1];
             }
         }
-        return n-count;
+        return count;
     }
 };
