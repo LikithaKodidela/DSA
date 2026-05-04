@@ -16,28 +16,40 @@ public:
     { 
         vector<int> postorder;
         if(root == nullptr) return postorder;
-        stack<TreeNode*> st1,st2;
 
-        st1.push(root);
-        while(!st1.empty())
+        stack<TreeNode*> st;
+        TreeNode* curr = root;
+
+        while(curr!=nullptr || !st.empty())
         {
-            TreeNode* topp=st1.top();
-            st1.pop();
-            st2.push(topp);
-            if(topp->left!=nullptr)
+           
+            if(curr!=nullptr)
             {
-                st1.push(topp->left);
+                st.push(curr);
+                curr=curr->left;
             }
-            if(topp->right!=nullptr)
+            else
             {
-                st1.push(topp->right);
+                TreeNode* temp = st.top()->right;
+                if(temp==nullptr)
+                {
+                    temp=st.top();
+                    st.pop();
+                    postorder.push_back(temp->val);
+                    while(!st.empty() && temp==st.top()->right)
+                    {
+                        temp = st.top();
+                        st.pop();
+                        postorder.push_back(temp->val);
+                    }
+                }
+                else
+                {
+                    curr = temp;
+                }
             }
         }
-        while(!st2.empty())
-        {
-            postorder.push_back(st2.top()->val);
-            st2.pop();
-        }
+        
         return postorder;
     }
 };
