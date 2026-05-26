@@ -54,7 +54,7 @@ public:
         {
             if(!visited[i])
             {
-                dfs(i,adj,visited);
+                bfs(i,adj,visited);
                 provinces++;
             }
         }
