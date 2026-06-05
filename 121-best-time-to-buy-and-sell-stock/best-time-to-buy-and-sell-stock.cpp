@@ -4,18 +4,11 @@ public:
        int n=nums.size();
        int max_profit=0;
        int min_price=INT_MAX;
-       int right=1,left=0;
-       while(right<n)
+       for(int i=0;i<n;i++)
        {
-           if(nums[right]>nums[left])
-           {
-              max_profit=max(max_profit,nums[right]-nums[left]);
-           }
-           else
-           {
-             left=right;
-           }
-           right++;
+         min_price = min(min_price,nums[i]);
+         int profit = nums[i] - min_price;
+         max_profit = max(profit,max_profit);
        }
        return max_profit;
     }
