@@ -27,7 +27,7 @@ public:
                 }
                 int up=1e9,left=1e9;
                 if(i > 0) up=prev[j];
-                if(j>0) left=curr[j-1];
+                if(j > 0) left=curr[j-1];
                 curr[j] = grid[i][j]+ min(up,left);
             }
             prev=curr;
