@@ -1,19 +1,26 @@
 class Solution {
-    bool solve(int i,int target,vector<int>& nums,vector<vector<int>> &dp)
+    bool solve(int target,vector<int>& nums,vector<vector<bool>> &dp)
     {
-        if(target == 0) return true;
-        if(i==0) return nums[0] == target;
-
-        if(dp[i][target]!=-1) return dp[i][target]; 
-
-        bool notTake = solve(i-1,target,nums,dp);
-        bool take = false;
-        if(nums[i]<=target)
-        {
-            take = solve(i-1,target-nums[i],nums,dp);
-        }
-        
-        return dp[i][target] = take || notTake;
+        int n = nums.size();
+       for(int i =0;i<n;i++)
+       {
+          dp[i][0] = true;
+       }
+       if ( nums[0]<=target) dp[0][nums[0]] = true;
+       for(int i=1;i<n;i++)
+       {
+         for(int k=1;k<=target;k++)
+         {
+            bool notTake = dp[i-1][k];
+            bool take = false ;
+            if(nums[i]<=k) 
+            {
+                take = dp[i-1][k-nums[i]];
+            }
+            dp[i][k] = take || notTake;
+         }
+       }
+       return dp[n-1][target];
     }
 
 public:
@@ -28,7 +35,7 @@ public:
          if(sum % 2 != 0) return false;
 
          int target = sum/2;
-         vector<vector<int>> dp(n,vector<int>(target+1,-1));
-         return solve(n-1,target,nums,dp);
+        vector<vector<bool>> dp(n,vector<bool>(target+1,false));
+         return solve(target,nums,dp);
     }
 };
