@@ -10,7 +10,7 @@ class Solution {
        if ( nums[0]<=target) prev[nums[0]] = true;
        for(int i=1;i<n;i++)
        {
-         for(int k=1;k<=target;k++)
+         for(int k=0;k<=target;k++)
          {
             bool notTake = prev[k];
             bool take = false ;
