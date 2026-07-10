@@ -1,23 +1,23 @@
 class Solution {
-    int solve(int ind, vector<int>& nums , int target , vector<vector<int>> &dp)
-    {
-        if (ind == 0)
-        {
-            if(nums[ind] == 0  && target==0) return 2;
-            if(target == 0 || target == nums[0]) return 1;
-            return 0;
-        }
+    // int solve(int ind, vector<int>& nums , int target , vector<vector<int>> &dp)
+    // {
+    //     if (ind == 0)
+    //     {
+    //         if(nums[ind] == 0  && target==0) return 2;
+    //         if(target == 0 || target == nums[0]) return 1;
+    //         return 0;
+    //     }
 
-        if(dp[ind][target]!=-1) return dp[ind][target];
+    //     if(dp[ind][target]!=-1) return dp[ind][target];
 
-        int notTake = solve(ind - 1 , nums , target , dp) ;
-        int take = 0;
-        if(nums[ind]<=target)
-        {
-            take = solve(ind - 1, nums , target-nums[ind], dp );
-        }
-        return dp[ind][target]= take  +  notTake ;
-    }
+    //     int notTake = solve(ind - 1 , nums , target , dp) ;
+    //     int take = 0;
+    //     if(nums[ind]<=target)
+    //     {
+    //         take = solve(ind - 1, nums , target-nums[ind], dp );
+    //     }
+    //     return dp[ind][target]= take  +  notTake ;
+    // }
 public:
     int findTargetSumWays(vector<int>& nums, int target) {
         int n = nums.size();
@@ -28,7 +28,22 @@ public:
         }
         if((totalSum - target)%2  || totalSum < target ) return 0;
         int sum = (totalSum - target) / 2 ;
-        vector<vector<int>> dp(n,vector<int> (sum+1,-1));
-        return solve(n-1,nums,sum,dp);
+        vector<vector<int>> dp(n,vector<int> (sum+1,0));
+        if(nums[0]==0) dp[0][0]=2;
+        else dp[0][0]=1;
+
+        if(nums[0]!=0 && nums[0]<=sum) dp[0][nums[0]] = 1;
+
+        for(int ind=1; ind<n; ind++)
+        {
+            for(int target = 0;target<=sum;target++)
+            {
+                int notTake = dp[ind-1][target];
+                int take = 0;
+                if(nums[ind]<=target) take = dp[ind -1][target-nums[ind]];
+                 dp[ind][target] = take + notTake ;
+            }
+        }
+        return dp[n-1][sum];
     }
 };
